@@ -14,7 +14,7 @@ function Auth({ onAuthSuccess }) {
         e.preventDefault();
         setError("");
         setLoading(true);
-
+const API_URL = import.meta.env.VITE_API_URL;
         try {
             const endpoint = isLogin ? "login" : "register";
 
@@ -23,7 +23,7 @@ function Auth({ onAuthSuccess }) {
                 : { name, email, password };
 
             const response = await fetch(
-                `http://localhost:8081/api/auth/${endpoint}`,
+                `${API_URL}/api/auth/${endpoint}`,
                 {
                     method: "POST",
                     headers: {
