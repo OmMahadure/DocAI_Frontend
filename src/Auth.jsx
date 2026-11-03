@@ -17,7 +17,7 @@ function Auth({ onAuthSuccess }) {
     const gmailRegex = /^[A-Za-z0-9._%+-]+@gmail\.com$/;
 
     if (!gmailRegex.test(email.trim())) {
-        setError("Enter Gmail address");
+        setError("Enter valid Gmail address");
         return;
     }
         setLoading(true);
@@ -44,13 +44,19 @@ const API_URL = import.meta.env.VITE_API_URL;
 
             const data = await response.json().catch(() => null);
 
-            if (!response.ok) {
-                throw new Error(
-                    typeof data === "string"
-                        ? data
-                        : data?.message || "Please register yourself."
-                );
-            }
+if (!response.ok) {
+    if (isLogin) {
+        throw new Error(
+            "Invalid email or password."
+        );
+    }
+
+    throw new Error(
+        typeof data === "string"
+            ? data
+            : data?.message || "Registration failed. Please try again."
+    );
+}
 
             if (!isLogin) {
                 setIsLogin(true);
