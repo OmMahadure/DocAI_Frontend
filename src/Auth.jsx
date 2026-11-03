@@ -13,7 +13,16 @@ function Auth({ onAuthSuccess }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError("");
+        // Allow only Gmail addresses
+    const gmailRegex = /^[A-Za-z0-9._%+-]+@gmail\.com$/;
+
+    if (!gmailRegex.test(email.trim())) {
+        setError("Enter Gmail address");
+        return;
+    }
         setLoading(true);
+
+
 const API_URL = import.meta.env.VITE_API_URL;
         try {
             const endpoint = isLogin ? "login" : "register";
@@ -39,7 +48,7 @@ const API_URL = import.meta.env.VITE_API_URL;
                 throw new Error(
                     typeof data === "string"
                         ? data
-                        : data?.message || "Authentication failed"
+                        : data?.message || "Please register yourself."
                 );
             }
 
@@ -113,6 +122,8 @@ person
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    pattern="[A-Za-z0-9._%+-]+@gmail\.com"
+    title="Please enter a valid Gmail address"
                 />
             </div>
 
