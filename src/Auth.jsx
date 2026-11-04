@@ -54,14 +54,14 @@ if (!response.ok) {
     throw new Error(
         typeof data === "string"
             ? data
-            : data?.message || "Registration failed. Please try again."
+            : data?.message || "User already exist. Please login"
     );
 }
 
             if (!isLogin) {
                 setIsLogin(true);
                 setPassword("");
-                setError("Registration successful. Please log in.");
+                setError("Registration successful. Please login.");
                 return;
             }
 

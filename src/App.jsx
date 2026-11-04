@@ -38,15 +38,15 @@ function App() {
 
     const chatBoxRef = useRef(null);
 
-   useEffect(() => {
-    if (isAuthenticated) {
-        loadDocuments();
-    } else {
-        setDocuments([]);
-        setSelectedDocument(null);
-        setMessages([]);
-    }
-}, [isAuthenticated]);
+    useEffect(() => {
+        if (isAuthenticated) {
+            loadDocuments();
+        } else {
+            setDocuments([]);
+            setSelectedDocument(null);
+            setMessages([]);
+        }
+    }, [isAuthenticated]);
 
     useEffect(() => {
 
@@ -164,6 +164,17 @@ function App() {
             const data = await response.json();
 
             console.log("Upload response:", data);
+
+            Swal.fire({
+                icon: "success",
+                title: "Document Uploaded.",
+                text: "Document uploaded successfully.",
+                timer: 2500,
+                customClass: {
+                    popup: "success-popup"
+                },
+                showConfirmButton: false
+            });
 
             setSelectedFile(null);
             document.getElementById("fileInput").value = "";
@@ -440,42 +451,42 @@ function App() {
         }
     };
     const handleLogout = () => {
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You will be logged out of DocAI.",
-        icon: "warning",
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You will be logged out of DocAI.",
+            icon: "warning",
 
-        showCancelButton: true,
-        confirmButtonText: "Yes, logout",
-        cancelButtonText: "Cancel",
+            showCancelButton: true,
+            confirmButtonText: "Yes, logout",
+            cancelButtonText: "Cancel",
 
-        confirmButtonColor: "#6551e8",
-        cancelButtonColor: "#64748b",
-        
-        customClass: {
+            confirmButtonColor: "#6551e8",
+            cancelButtonColor: "#64748b",
+
+            customClass: {
                 popup: "logout-popup"
             },
-        showClass: {
-            popup: `
+            showClass: {
+                popup: `
                 animate__animated
                 animate__fadeInUp
                 animate__faster
             `
-        },
+            },
 
-        hideClass: {
-            popup: `
+            hideClass: {
+                popup: `
                 animate__animated
                 animate__fadeOutDown
                 animate__faster
             `
-        }
-    }).then((result) => {
-        if (result.isConfirmed) {
-            logout();
-        }
-    });
-};
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                logout();
+            }
+        });
+    };
 
 
     const logout = () => {
@@ -503,22 +514,22 @@ function App() {
 
 
     //login-success handler
-   if (!isAuthenticated) {
-    return (
-        <Auth
-            onAuthSuccess={async () => {
-                // Clear any previous account's data
-                setDocuments([]);
-                setSelectedDocument(null);
-                setMessages([]);
-                setSelectedFile(null);
-                setQuestion("");
-                setError("");
+    if (!isAuthenticated) {
+        return (
+            <Auth
+                onAuthSuccess={async () => {
+                    // Clear any previous account's data
+                    setDocuments([]);
+                    setSelectedDocument(null);
+                    setMessages([]);
+                    setSelectedFile(null);
+                    setQuestion("");
+                    setError("");
 
-                // Switch to the authenticated application
-                setIsAuthenticated(true);
-            }}
-        />
+                    // Switch to the authenticated application
+                    setIsAuthenticated(true);
+                }}
+            />
         );
     }
 
@@ -627,9 +638,8 @@ function App() {
                         <div className="document-item" key={document.id}>
                             <button
                                 type="button"
-                                className={`document-select ${
-        selectedDocument?.id === document.id ? "selected" : ""
-    }`}
+                                className={`document-select ${selectedDocument?.id === document.id ? "selected" : ""
+                                    }`}
                                 title={document.fileName}
                                 onClick={() => {
                                     openDocumentHistory(document);

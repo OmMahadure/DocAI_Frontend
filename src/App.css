@@ -395,6 +395,10 @@ background: #222A43;
     color: #777;
 }
 
+.success-popup {
+    border-radius: 17px !important;
+    max-width:350px !important;
+}
 
 .main {
     display: flex;
@@ -1404,6 +1408,38 @@ box-shadow: 0 2px 8px rgb(31 41 55 / 4%);
         font-size: 13px !important;
     }
 }
+
+.success-popup{
+    width: calc(100% - 90px) !important;
+        padding: 18px 14px !important;
+        border-radius: 14px !important;
+
+}
+ .success-popup .swal2-title {
+        font-size: 20px !important;
+        padding: 0 !important;
+    }
+
+    .success-popup .swal2-html-container {
+        font-size: 13px !important;
+        margin: 8px 0 12px !important;
+    }
+
+    .success-popup .swal2-icon {
+        transform: scale(0.75);
+        margin: 2px auto !important;
+    }
+
+    .success-popup .swal2-actions {
+        margin-top: 5px !important;
+        gap: 8px;
+    }
+
+    .success-popup .swal2-styled {
+        padding: 9px 14px !important;
+        margin: 0 !important;
+        font-size: 13px !important;
+    }
 
 
 @media (prefers-reduced-motion: reduce) {
